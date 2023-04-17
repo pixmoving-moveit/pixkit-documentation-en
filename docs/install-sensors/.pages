@@ -1,0 +1,7 @@
+nav:
+  - Overview: index.md
+  - IPC-installation.md
+  - LiDAR-installation.md
+  - camera-installation.md
+  - GNSS-installation.md
+  - ultrasonic-sensor-installation.md
