@@ -9,7 +9,7 @@
 2. When the vehicle is within the `parking_lot` area, the planner will switch to `Parking scenario`, and the `costmap_generator` and `freespace_planner` will start working.
 3. The `costmap_generator` generates an `occupancy_grid` as the cost map for the `freespace_planner`.
 4. The `freespace_planner` uses the cost map for path searching and planning.
-5. The final `trajectory` is passed to the [trajectory following](./trajectory_following.md) module to generate control commands.
+5. The final `trajectory` is passed to the [trajectory following](./trajectory-follower.md) module to generate control commands.
 
 ## Costmap Generator
 As shown in the figure below, when the vehicle is within the `parking_lot` area (the light-yellow polygon inside the blue box), the `goal_pose`(the green box with the coordinate axis) is set, and there are `objects` (the red box).
@@ -36,7 +36,7 @@ After setting the target within the `parking_lot` area, the `occupancy_grip` cos
 ## Freespace Planner
 Given the vehicle's position `initial_pose` and `goal_pose`, the freespace_planner uses [A* Search](https://github.com/autowarefoundation/autoware.universe/tree/main/planning/freespace_planning_algorithms) to plan a feasible trajectory for the vehicle to reach the `goal_pose`.
 
-Because the `freespace planner` may generate overlapping trajectories that can not be handled by the [controller](./trajectory_following.md), so `freespace planner` split trajectory into serveral `partial trajectories` in order to make sure they can be used by `controller`. 
+Because the `freespace planner` may generate overlapping trajectories that can not be handled by the [controller](./trajectory-follower.md), so `freespace planner` split trajectory into serveral `partial trajectories` in order to make sure they can be used by `controller`. 
 ![costmap_generator_2](./images/costmap_generator_2.png)
 
 ### Key Parameters 
