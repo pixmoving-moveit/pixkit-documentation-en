@@ -7,7 +7,7 @@
 
 2. [Multi Object Tracker](https://github.com/autowarefoundation/autoware.universe/tree/main/perception/multi_object_tracker) receives [DetectedObjects](https://github.com/tier4/autoware_auto_msgs/blob/tier4/main/autoware_auto_perception_msgs/msg/DetectedObjects.idl) and performs object tracking to obtain object classification, position, shape, velocity, and acceleration information. It outputs [TrackedObjects](https://github.com/tier4/autoware_auto_msgs/blob/tier4/main/autoware_auto_perception_msgs/msg/TrackedObjects.idl).
 
-3. [Map Based Prediction](https://github.com/autowarefoundation/autoware.universe/tree/main/perception/map_based_prediction) receives [DetectedObjects](https://github.com/tier4/autoware_auto_msgs/blob/tier4/main/autoware_auto_perception_msgs/msg/DetectedObjects.idl), predicts object trajectories based on [map information](../mapping/lanelet2-map.md), and outputs [PredictedObjects](https://github.com/tier4/autoware_auto_msgs/blob/tier4/main/autoware_auto_perception_msgs/msg/PredictedObjects.idl).
+3. [Map Based Prediction](https://github.com/autowarefoundation/autoware.universe/tree/main/perception/map_based_prediction) receives [TrackedObjects](https://github.com/tier4/autoware_auto_msgs/blob/tier4/main/autoware_auto_perception_msgs/msg/TrackedObjects.idl), predicts object trajectories based on [map information](../mapping/lanelet2-map.md), and outputs [PredictedObjects](https://github.com/tier4/autoware_auto_msgs/blob/tier4/main/autoware_auto_perception_msgs/msg/PredictedObjects.idl).
 
 ## How To Use
 
@@ -19,6 +19,18 @@
 
 Detect objects in pointcloud using [CenterPoint](https://github.com/tianweiy/CenterPoint), you can see the `CAR` obejct in the blue box.
 
+#### Input Topics
+|**Topic**|**Type**|**Description**|
+|---------|-------|--------|
+|/sensing/lidar/concatenated/pointcloud|sensor_msgs/msg/PointCloud2|realtime pointcloud|
+
+#### Output Topics
+|**Topic**|**Type**|**Description**|
+|---------|-------|--------|
+|/perception/object_recognition/detection/centerpoint/objects|[autoware_auto_perception_msgs/msg/DetectedObjects](https://github.com/tier4/autoware_auto_msgs/blob/tier4/main/autoware_auto_perception_msgs/msg/DetectedObjects.idl)|Detected Objects|
+
+
+
 ### Multi Object Tracker
 ![lidar_based_perception_3](./images/lidar_based_perception_3.png)
 
@@ -29,6 +41,16 @@ associate the data of the multi-frame perception results, convert it into the `M
 
 #### EKF Tracker
 Choose different models for different classifications to track the perception results and improve tracking stability and accuracy.
+
+#### Input Topics
+|**Topic**|**Type**|**Description**|
+|---------|-------|--------|
+|/perception/object_recognition/detection/centerpoint/objects|[autoware_auto_perception_msgs::msg::DetectedObjects](https://github.com/tier4/autoware_auto_msgs/blob/tier4/main/autoware_auto_perception_msgs/msg/DetectedObjects.idl)|detected objects|
+
+#### Output Topics
+|**Topic**|**Type**|**Description**|
+|---------|-------|--------|
+|/perception/object_recognition/tracking/objects|[autoware_auto_perception_msgs/msg/TrackedObjects](https://github.com/tier4/autoware_auto_msgs/blob/tier4/main/autoware_auto_perception_msgs/msg/TrackedObjects.idl)|Tracked objects without trajectory|
 
 ### Map Based Prediction
 ![lidar_based_perception_4](./images/lidar_based_perception_4.png)
@@ -45,6 +67,17 @@ Detect whether if the object need to change lane or to to do left lane change or
 #### Generate predicted Trajectories for objects
 
 According to the lane change information and map information, generate the predicted reference trajectories for objects.
+
+#### Input Topics
+|**Topic**|**Type**|**Description**|
+|---------|-------|--------|
+|/perception/object_recognition/tracking/objects|[autoware_auto_perception_msgs/msg/TrackedObjects](https://github.com/tier4/autoware_auto_msgs/blob/tier4/main/autoware_auto_perception_msgs/msg/TrackedObjects.idl)|Tracked Objects without trajectory|
+|/map/vector_map|autoware_auto_mapping_msgs/msg/HADMapBin|lanelet2 map|
+
+#### Output Topics
+|**Topic**|**Type**|**Description**|
+|---------|-------|--------|
+|/perception/object_recognition/objects|[autoware_auto_perception_msgs::msg::PredictedObjects](https://github.com/tier4/autoware_auto_msgs/blob/tier4/main/autoware_auto_perception_msgs/msg/PredictedObjects.idl)|objects with predicted trajectories|
 
 ## Reference
 
