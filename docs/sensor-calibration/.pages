@@ -1,5 +1,6 @@
 nav:
   - Overview: index.md
+  - calibration_tool_installation.md
   - camera-intrisics-calibration.md
   - LiDAR-camera-calibration.md
   - IMU-calibration.md
