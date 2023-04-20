@@ -1,1 +1,0 @@
-# Hands on Pix Chassis
