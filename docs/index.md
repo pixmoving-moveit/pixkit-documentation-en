@@ -81,7 +81,7 @@ rs162camera:
   pitch: 0.00713767
   yaw: -1.55820481
 ```
-![camera-lidar-calibration](./sensor-calibration/images/lidar-camera-calibration)
+![camera-lidar-calibration](./sensor-calibration/image/lidar2camera/cali_result.jpg)
 - [IMU calibration](./sensor-calibration/IMU-calibration.md)
 ```yaml
 Gyr:
@@ -123,7 +123,7 @@ Acc:
 ### Documentation For Autonomous Driving Development
 - [Flash OS](./flash-operating-system/flash-OS-image.md)
 - [Hardware Integration](./install-sensors/index.md)
-- [Hands on Chassis](./hands-on-pix-chassis/index.md)
+- [Pix Chassis User Manual](./pix-chassis-user-manual/index.md)
 - [Sensor Calibration](./sensor-calibration/IMU-calibration.md)
 - [Mapping](./mapping/index.md)
 - [Hands on Autoware](./hands-on-Autoware/launch-autoware.md)

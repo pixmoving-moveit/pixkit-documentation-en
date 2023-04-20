@@ -35,4 +35,4 @@ plugins:
   - macros
   - mkdocs-video
   - search
-repo_url: https://github.com/pixmoving-moveit/pixkit-documentation
+repo_url: https://github.com/pixmoving-moveit

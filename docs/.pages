@@ -1,7 +1,7 @@
 nav:
   - Introduction: index.md
   - install-sensors
-  - hands-on-pix-chassis
+  - pix-chassis-user-manual 
   - flash-operating-system
   - sensor-calibration
   - mapping
