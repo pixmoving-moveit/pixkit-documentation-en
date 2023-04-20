@@ -14,7 +14,7 @@
  limitations under the License.
 -->
 
-# PIXKIT开源自动驾驶开发教学套件
+# Pixkit Autonomous Driving Development Kit 
 ## Pixmoving Inc
 
 ### Who Are We
