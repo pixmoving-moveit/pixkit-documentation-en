@@ -26,9 +26,9 @@ The calibration of LiDAR to camera is used to register the 3D point cloud data o
 ![](./image/lidar2camera/cali_result.jpg)
 
 ## Start calibration
+> Completed [camera intrinsic calibration](./camera-intrisics-calibration.md) -> `step-3 Signs of success`
 
 ### step-1: Collect calibration data
-#### Start collecting
 
 #### Start recording.
 ```shell
