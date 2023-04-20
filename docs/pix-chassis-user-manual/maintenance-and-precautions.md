@@ -4,7 +4,7 @@
 
 When the chassis is running, you should pay attention to protecting the safety of the surrounding people and protecting the chassis from injury. When running the chassis, you should ensure the safety of the environment around the chassis. The following guidelines for safe operation should be followed:
 
-![](https://tcs.teambition.net/storage/312sc1a1c3d50d7960a3069e925498a917f0?Signature=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBcHBJRCI6IjU5Mzc3MGZmODM5NjMyMDAyZTAzNThmMSIsIl9hcHBJZCI6IjU5Mzc3MGZmODM5NjMyMDAyZTAzNThmMSIsIl9vcmdhbml6YXRpb25JZCI6IiIsImV4cCI6MTY4MjU4OTE4MiwiaWF0IjoxNjgxOTg0MzgyLCJyZXNvdXJjZSI6Ii9zdG9yYWdlLzMxMnNjMWExYzNkNTBkNzk2MGEzMDY5ZTkyNTQ5OGE5MTdmMCJ9.IQw4T0Pd7dYYMO2xuoIOK_4hzTDZyXB0aseyVIpsInI&download=%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-04-14%20110803.png "")
+![](./images/safty-guard.png)
 
 ## 2 Battery And Charger Use Considerations
 

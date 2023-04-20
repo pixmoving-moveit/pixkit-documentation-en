@@ -2,7 +2,7 @@
 
 ## 1 Product List
 
-![](https://tcs.teambition.net/storage/312sd073e5bc40868062ae4cce10c429fdcb?Signature=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBcHBJRCI6IjU5Mzc3MGZmODM5NjMyMDAyZTAzNThmMSIsIl9hcHBJZCI6IjU5Mzc3MGZmODM5NjMyMDAyZTAzNThmMSIsIl9vcmdhbml6YXRpb25JZCI6IiIsImV4cCI6MTY4MjU4OTE4MiwiaWF0IjoxNjgxOTg0MzgyLCJyZXNvdXJjZSI6Ii9zdG9yYWdlLzMxMnNkMDczZTViYzQwODY4MDYyYWU0Y2NlMTBjNDI5ZmRjYiJ9.N3A_5z-PRP-3fBQ01OLmh1aJ5yyjn07PsltLGUiRtf0&download=%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-04-13%20180336.png "")
+![](./images/product-list.png)
 
 ## 2 Basic Functions
 
@@ -30,13 +30,13 @@ The chassis is connected to the chassis body through a wireless remote control, 
 
 The main load-bearing structure of the PIXLOOP chassis is assembled with high-strength steel, and the surface cover is sprayed aluminum. The wheel suspension part is formed by professional stamping, and the design process uses finite element analysis to fully meet the various impacts and challenges brought about by vehicle motion control and different scene factors. Surface formed decking provides high mechanical strength combined with aesthetics. The chassis body adopts an intercommunicating box-type structure design, which provides relatively large space redundancy for chassis equipment installation and later expansion.
 
-![](https://tcs.teambition.net/storage/312sadf1958d3071fdcf521eca884fe4a609?Signature=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBcHBJRCI6IjU5Mzc3MGZmODM5NjMyMDAyZTAzNThmMSIsIl9hcHBJZCI6IjU5Mzc3MGZmODM5NjMyMDAyZTAzNThmMSIsIl9vcmdhbml6YXRpb25JZCI6IiIsImV4cCI6MTY4MjU4OTE4MiwiaWF0IjoxNjgxOTg0MzgyLCJyZXNvdXJjZSI6Ii9zdG9yYWdlLzMxMnNhZGYxOTU4ZDMwNzFmZGNmNTIxZWNhODg0ZmU0YTYwOSJ9.s6NkJFMXrpwHb4oquEjjN0vvOSuX4xBLZ0fR44YoZmM&download=image.png "")
+![](./images/chassis-overview.png)
 
 ### 3.1 Switch And Connection Ports
 
 The schematic diagram of the chassis switch and the open interface is as follows:
 
-![](https://tcs.teambition.net/storage/312sd0b543be02de6443d18e06a17ba2cd78?Signature=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBcHBJRCI6IjU5Mzc3MGZmODM5NjMyMDAyZTAzNThmMSIsIl9hcHBJZCI6IjU5Mzc3MGZmODM5NjMyMDAyZTAzNThmMSIsIl9vcmdhbml6YXRpb25JZCI6IiIsImV4cCI6MTY4MjU4OTE4MiwiaWF0IjoxNjgxOTg0MzgyLCJyZXNvdXJjZSI6Ii9zdG9yYWdlLzMxMnNkMGI1NDNiZTAyZGU2NDQzZDE4ZTA2YTE3YmEyY2Q3OCJ9.AmDJOEdO12IRBPVKmFLyUuh_hawjjY9PWw2UVBgmY2c&download=image.png "")
+![](./images/connection-ports.png)
 
 #### Emergency Stop
 
@@ -58,7 +58,7 @@ The 24V power interface provides a rated 300W 24V DC power supply; the 12V rated
 
 The chassis provides the basic lighting system of the vehicle. Compared with traditional vehicles, it includes headlights, front and rear turn signals, and brake lights.
 
-![](https://tcs.teambition.net/storage/312s8be3482ba8fdc9668a1d199a0b9b63e2?Signature=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBcHBJRCI6IjU5Mzc3MGZmODM5NjMyMDAyZTAzNThmMSIsIl9hcHBJZCI6IjU5Mzc3MGZmODM5NjMyMDAyZTAzNThmMSIsIl9vcmdhbml6YXRpb25JZCI6IiIsImV4cCI6MTY4MjU4OTE4MiwiaWF0IjoxNjgxOTg0MzgyLCJyZXNvdXJjZSI6Ii9zdG9yYWdlLzMxMnM4YmUzNDgyYmE4ZmRjOTY2OGExZDE5OWEwYjliNjNlMiJ9.43Fp6_RRzcfL8Lq3BAeNXsrX7oQOblC7446wF3B4fZc&download=image.png "")
+![](./images/lights.png)
 
 #### Headlight
 
@@ -81,11 +81,11 @@ The wireless remote control is the basic controller connected to the PIX chassis
 | Remote control power supply mode  | 3×1.5V No.5 dry cell   | Remote control display    | LCD display                                           |
 | Receiver power supply   | 12-24V DC power supply | Communication distance   | 150M (depending on the surrounding environment) |
 
-![](https://tcs.teambition.net/storage/312s53dbaf3dec373d6dcb188464e86f4fbe?Signature=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBcHBJRCI6IjU5Mzc3MGZmODM5NjMyMDAyZTAzNThmMSIsIl9hcHBJZCI6IjU5Mzc3MGZmODM5NjMyMDAyZTAzNThmMSIsIl9vcmdhbml6YXRpb25JZCI6IiIsImV4cCI6MTY4MjU4OTE4MiwiaWF0IjoxNjgxOTg0MzgyLCJyZXNvdXJjZSI6Ii9zdG9yYWdlLzMxMnM1M2RiYWYzZGVjMzczZDZkY2IxODg0NjRlODZmNGZiZSJ9.P0v_e0ey44WjJCi33HTNzwg_15imbYxU9BJ0lvkRVnY&download=image.png "")
+![](./images/remote-control.png)
 
 The operation panel integrates a variety of switches, including remote control joystick × 2; two-stage toggle switch × 3; button × 4; knob switch × 4, the functions are introduced as follows.
 
-![](https://tcs.teambition.net/storage/312s4d1ac05d62e1deb789cc951cc8093b97?Signature=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBcHBJRCI6IjU5Mzc3MGZmODM5NjMyMDAyZTAzNThmMSIsIl9hcHBJZCI6IjU5Mzc3MGZmODM5NjMyMDAyZTAzNThmMSIsIl9vcmdhbml6YXRpb25JZCI6IiIsImV4cCI6MTY4MjU4OTE4MiwiaWF0IjoxNjgxOTg0MzgyLCJyZXNvdXJjZSI6Ii9zdG9yYWdlLzMxMnM0ZDFhYzA1ZDYyZTFkZWI3ODljYzk1MWNjODA5M2I5NyJ9.E7TIvgzwgqaqsAXzanutsjr9OVJ8wGVhPxhfIerAHao&download=image.png "")
+![](./images/remote-control-2.png)
 
 | No. | Button Name                                     | No. | Button Name                           |
 | ----- | ---------------------------------------------------- | ----- | ------------------------------------------ |
@@ -127,7 +127,7 @@ This button toggles the chassis control mode. Push the rod down to switch to the
 
 The knob controls the switching of the steering mode of the chassis, providing three steering modes: normal steering mode, front and rear opposite direction steering mode, and front and rear same direction steering mode.
 
-![](https://tcs.teambition.net/storage/312se5eadee76b5e98c0f144757992e02aac?Signature=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBcHBJRCI6IjU5Mzc3MGZmODM5NjMyMDAyZTAzNThmMSIsIl9hcHBJZCI6IjU5Mzc3MGZmODM5NjMyMDAyZTAzNThmMSIsIl9vcmdhbml6YXRpb25JZCI6IiIsImV4cCI6MTY4MjU4OTE4MiwiaWF0IjoxNjgxOTg0MzgyLCJyZXNvdXJjZSI6Ii9zdG9yYWdlLzMxMnNlNWVhZGVlNzZiNWU5OGMwZjE0NDc1Nzk5MmUwMmFhYyJ9.wzEWkHziAAZLgJC-Qt8xnK30D0X9HyRzBBdVX9NkGC4&download=%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-04-13%20195405.png "")
+![](./images/steer-mode.png)
 
 #### Steering push rod
 
@@ -163,15 +163,15 @@ The remote control cannot be operated after it is locked.
 
 The remote control has two main pages, which can be switched through the Display Switch on the remote control. The first display screen mainly displays the operation instructions and the basic status of the chassis. The detailed introduction is as shown in the figure below.
 
-![](https://tcs.teambition.net/storage/312sc79848b6e31c80008853e3793505d7d6?Signature=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBcHBJRCI6IjU5Mzc3MGZmODM5NjMyMDAyZTAzNThmMSIsIl9hcHBJZCI6IjU5Mzc3MGZmODM5NjMyMDAyZTAzNThmMSIsIl9vcmdhbml6YXRpb25JZCI6IiIsImV4cCI6MTY4MjU4OTE4MiwiaWF0IjoxNjgxOTg0MzgyLCJyZXNvdXJjZSI6Ii9zdG9yYWdlLzMxMnNjNzk4NDhiNmUzMWM4MDAwODg1M2UzNzkzNTA1ZDdkNiJ9.XaALGqVqFThy0zeqw5C4CDCH2tGRe_BiyisHMk0ltMA&download=image.png "")
+![](./images/display-panel-1.png)
 
 The second display interface mainly displays the chassis mileage, specific system faults and the signal strength of the remote control. The detailed introduction is shown in the figure below (the signal strength ranges from 0-255 to represent from weak to strong).
 
-![](https://tcs.teambition.net/storage/312sbcdf014317bd0eaf29433f09d536cff5?Signature=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBcHBJRCI6IjU5Mzc3MGZmODM5NjMyMDAyZTAzNThmMSIsIl9hcHBJZCI6IjU5Mzc3MGZmODM5NjMyMDAyZTAzNThmMSIsIl9vcmdhbml6YXRpb25JZCI6IiIsImV4cCI6MTY4MjU4OTE4MiwiaWF0IjoxNjgxOTg0MzgyLCJyZXNvdXJjZSI6Ii9zdG9yYWdlLzMxMnNiY2RmMDE0MzE3YmQwZWFmMjk0MzNmMDlkNTM2Y2ZmNSJ9.mCKm7RUxEJLzK3crwQDpYcfJUsfm8fF-9dEYNEEeZzQ&download=image.png "")
+![](./images/display-panel-2.png)
 
 In addition, the remote control has a prompt interface for displaying fault signals of the remote control.
 
-![](https://tcs.teambition.net/storage/312s7e43131f45c5b16af48e3939a2737388?Signature=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBcHBJRCI6IjU5Mzc3MGZmODM5NjMyMDAyZTAzNThmMSIsIl9hcHBJZCI6IjU5Mzc3MGZmODM5NjMyMDAyZTAzNThmMSIsIl9vcmdhbml6YXRpb25JZCI6IiIsImV4cCI6MTY4MjU4OTE4MiwiaWF0IjoxNjgxOTg0MzgyLCJyZXNvdXJjZSI6Ii9zdG9yYWdlLzMxMnM3ZTQzMTMxZjQ1YzViMTZhZjQ4ZTM5MzlhMjczNzM4OCJ9.8CGJkZspthEEXUdWSo7qAt_lCzlYp0AB5wdMpDVSY3I&download=%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-04-13%20202007.png "")
+![](./images/display-panel-3.png)
 
 #### Tips for safe operation of the remote control
 

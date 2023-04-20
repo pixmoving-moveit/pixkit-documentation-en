@@ -111,4 +111,4 @@ The power system is mainly composed of 72V DC power supply battery, power batter
 
 ## 6 Dimension Drawing
 
-![](https://tcs.teambition.net/storage/312s01cab6f75e643ea3dfba3b5bf149eb5e?Signature=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBcHBJRCI6IjU5Mzc3MGZmODM5NjMyMDAyZTAzNThmMSIsIl9hcHBJZCI6IjU5Mzc3MGZmODM5NjMyMDAyZTAzNThmMSIsIl9vcmdhbml6YXRpb25JZCI6IiIsImV4cCI6MTY4MjU4OTE4MiwiaWF0IjoxNjgxOTg0MzgyLCJyZXNvdXJjZSI6Ii9zdG9yYWdlLzMxMnMwMWNhYjZmNzVlNjQzZWEzZGZiYTNiNWJmMTQ5ZWI1ZSJ9.olTDl5fDIJW-SWmJLjQtoBuB3wmKgbp0c3rWEcQdLyo&download=%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-04-14%20104029.png "")
+![](./images/chassis-dimension.png)
