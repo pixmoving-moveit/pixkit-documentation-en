@@ -1,7 +1,7 @@
 # Camera Intrisics Calibration
 
 ## Overview
-Camera intrinsic calibration is an important task in computer vision. Its purpose is to determine the internal parameters of the camera, such as the focal length, optical center, and distortion parameters. These internal parameters are key factors in camera imaging, which can affect the quality and geometric shape of the image.
+Camera intrinsic calibration is an important task in computer vision. Its purpose is to determine the intrinsics of the camera, such as the focal length, optical center, and distortion parameters. These intrinsics are key factors in camera imaging, which can affect the quality and geometric shape of the image.
 
 Intrinsic calibration can be completed by shooting a series of images of known objects (such as a chessboard). By analyzing these images, the camera's intrinsic parameters can be derived and saved as camera calibration parameters. Once the camera's intrinsic parameters are known, images can be corrected to eliminate distortion and correct the geometric shape of the image. This can make computer vision algorithms more accurate in analyzing and understanding images.
 
