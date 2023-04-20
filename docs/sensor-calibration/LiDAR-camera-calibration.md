@@ -85,7 +85,7 @@ ll ./shared_folder/pix_data/latest/png/
 ![](./image/lidar2camera/lidar2camera2.gif)
 
 
-### step-3: Parameter configuration
+### step-3: Intrinsics/Extrinsics configuration
 ![](./image/lidar2camera/cali_result.jpg)
 
 You can see that in the picture, the utility pole, the vehicle plate and the point cloud of the window are all aligned. This is the result of calibration. If you want to achieve such a result, you need to adjust the parameters to achieve such a calibration effect. You need to click the program button to fine-tune it.
