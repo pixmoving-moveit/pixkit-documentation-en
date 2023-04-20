@@ -118,7 +118,7 @@ You can see that in the picture, the utility pole, the vehicle plate and the poi
 
 <kbd>Reset</kbd>: Click this button to reset all manual adjustments and restore the initial parameters.
 
-<kbd>Save Image</kbd>: When the calibration is completed, click this button, and the calibration image, external and internal parameter matrix will be stored in `calibration_script/lidar2camera/config` by default.
+<kbd>Save Image</kbd>: When the calibration is completed, click this button, and the calibration image, extrinsics and intrinsics matrix will be stored in `calibration_script/lidar2camera/config` by default.
 
 ### step-4: Verify the calibration results
 - file1：`~/pix/pit-kit/Autoware/install/individual_params/share/individual_params/config/default/pixkit_sensor_kit/sensors_calibration.yaml`
