@@ -2,7 +2,6 @@ nav:
   - launch-autoware.md
   - multi-sensor-localization.md
   - LiDAR-based-perception.md
-  - lanelet2-based-routing.md
   - lane-driving.md
   - parking.md
   - traffic-light-detection.md
