@@ -7,3 +7,4 @@ nav:
   - parking.md
   - traffic-light-detection.md
   - trajectory-follower.md
+  - vehicle-interface.md
