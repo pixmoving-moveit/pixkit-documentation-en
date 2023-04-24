@@ -121,7 +121,6 @@ Acc:
 ![lanelet2-map](./images/lanelet2-map.jpg)
 
 ### Documentation For Autonomous Driving Development
-- [Flash OS](./flash-operating-system/flash-OS-image.md)
 - [Hardware Integration](./install-sensors/index.md)
 - [Pix Chassis User Manual](./pix-chassis-user-manual/index.md)
 - [Sensor Calibration](./sensor-calibration/IMU-calibration.md)

@@ -2,7 +2,6 @@ nav:
   - Introduction: index.md
   - install-sensors
   - pix-chassis-user-manual 
-  - flash-operating-system
   - sensor-calibration
   - mapping
   - hands-on-Autoware
