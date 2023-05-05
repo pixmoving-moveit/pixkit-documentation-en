@@ -130,7 +130,9 @@ Step 2: Fill in the `Calibration Results` in both `File 1` and `File 2`.
 ```shell
 ~/autoware_sim.sh
 ```
-![](./image/lidar2camera/result.jpg)
+![](./image/lidar2camera/World-coordinate-system-image-coordinate-system-and-camera-coordinate.jpg)
+
+![](./image/lidar2camera/result3.jpg)
 ![](./image/lidar2camera/result2.gif)
 
 ## NEXT

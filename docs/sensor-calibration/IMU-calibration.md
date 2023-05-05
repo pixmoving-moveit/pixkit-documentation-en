@@ -16,9 +16,14 @@ IMU (Inertial Measurement Unit) is one of the important sensors in autonomous dr
 1. Open the `google_chrome` browser.
 2. Enter the website: `192.168.1.110`.
 3. Click in sequence: `I/O setting` -> `TCP Server/NTRIP Caster4` -> <kbd>Disconnect</kbd> -> <kbd>Connect</kbd>.
+
 ![](./image/IMU_calibration/configuration_CGI410_02.gif)
+
 ![](./image/IMU_calibration/configuration_CGI410_03.jpg)
 4. Open the terminal and enter: `nc 192.168.1.110 9904` to determine whether the combination navigation is connected to the industrial computer.
+![](./image/IMU_calibration/configuration_CGI410_03.gif)
+
+
 
 ### Step 2: Record IMU data preparation.
 - Recording time: 2 hours.
