@@ -1,0 +1,9 @@
+nav:
+  - Overview: index.md
+  - Product Introduction: product-introduction.md
+  - Usage and Development: usage-and-development.md
+  - Vehicle Safety Mechanism: vehicle-safety-mechanism.md
+  - Specs of Chassis: specs.md
+  - FAQ: FAQ.md
+  - Mauntenance and Precautions: maintenance-and-precautions.md
+  - Ater-sale Service & Technical Support: after-sale-service-and-technical-support.md

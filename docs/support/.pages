@@ -1,2 +1,3 @@
 nav:
   - Overview: index.md
+  - flash-os-image: flash-OS-image.md
