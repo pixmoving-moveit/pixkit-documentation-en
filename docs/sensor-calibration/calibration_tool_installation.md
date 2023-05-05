@@ -98,6 +98,7 @@ cd ./sensors_calibration_tool/SensorsCalibration/lidar2camera/manual_calib/
 ./bin/run_lidar2camera data/0.png data/0.pcd data/center_camera-intrinsic.json data/top_center_lidar-to-center_camera-extrinsic.json
 cd -
 ```
+![](./image/install/run_lidar2camera.jpg)
 
 ## NEXT
 Now that you have completed the `calibration tool installation`, you can proceed to:
