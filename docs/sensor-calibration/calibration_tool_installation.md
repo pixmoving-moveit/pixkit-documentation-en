@@ -1,7 +1,7 @@
 # Installation of Calibration Toolset
 
 # Installation of Calibration Toolset
-> For users who have purchased pixkit, this step has been completed for you. Please proceed to [camera intrinsic calibration](./camera_intrinsics_calibration.md)
+> For users who have purchased pixkit, this step has been completed for you. Please proceed to [camera intrinsic calibration](./camera-intrisics-calibration.md)
 
 ## Overview
 - ROS2 acquisition package
