@@ -8,8 +8,9 @@
     - Front bumper LiDAR [RS-Bpearl]
     
 ## Calibration Procedure
-### Step 2: Select Calibration Scene
-- There is an elephant-shaped object in front of the vehicle.
+When selecting a calibration site, the following points should be considered:
+
+- The calibration site should be a common viewing area of the two lidars. It should exceed 2m X 2m X 2m and include three-dimensional objects, such as wall corners. This ensures that both lidars observe the same area simultaneously and allows for comparison of their measurements.
 
 ### Step 1: Launch Calibration Program
 
