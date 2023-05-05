@@ -8,6 +8,10 @@ IMU (Inertial Measurement Unit) is one of the important sensors in autonomous dr
 - Completed [calibration tool installation](./%E6%A0%87%E5%AE%9A%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85.md)
 - Prepared hardware:
     - [Huace CHC® CGI-410](https://www.huace.cn/product/product_show/467)
+- Data Type: `sensor_msgs/msg/Imu`
+- Data Requirement: Only record `angular_velocity` and `linear_acceleration`.
+
+> As long as the data requirement is met, imu calibration can also be performed on ros2bag data from other sensors.
 
 ## Calibration Steps
 > Note: Keep the industrial computer without running other ROS programs to prevent the sensor from being occupied.
