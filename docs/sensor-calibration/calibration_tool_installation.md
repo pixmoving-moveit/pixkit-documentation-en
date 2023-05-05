@@ -1,117 +1,103 @@
 # Installation of Calibration Toolset
-> For users who have purchased pixkit, this step has been completed for you. Please proceed directly to [camera intrinsic calibration](./camera-intrisics-calibration.md)
+
+# Installation of Calibration Toolset
+> For users who have purchased pixkit, this step has been completed for you. Please proceed to [camera intrinsic calibration](./camera_intrinsics_calibration.md)
+
 ## Overview
-Deploy the calibration toolset using docker and source code compilation
-
-The purpose of docker deployment is:
-
-- Collect calibration raw data of the camera and the main LiDAR, with the format of png images and pcd point cloud files
-
-The purpose of source code compilation deployment is:
-
-- Calibrate the collected sensor data
+- ROS2 acquisition package
+- ROS2 calibration package
+- Calibration executable
 
 ## Prerequisites
-- ubuntu22.04
+- Ubuntu 22.04
 - Linux kernel == 5.19.0-40-generic
 - ROS2: Humble
+- [Autoware](https://github.com/pixmoving-moveit/Autoware/tree/feature/pixkit_sensors)
 
 
-## Installation and Deployment
-### Step 1: Docker Deployment - Install Docker
-[install docker](https://docs.docker.com/engine/install/ubuntu/)
-
-### Step 2: Docker Deployment - Build Docker Image
-- Clone the code repository
-
-- clone Github code repository
+## Installation
+### Step 1: Clone the code repository
 ```shell
-git clone https://github.com/pixmoving-moveit/sensor_calibration_tool.git
-cd sensor_calibration_tool
-git submodule init
-git submodule update
+git clone -b feature/deploy-calibration-tools https://github.com/pixmoving-moveit/sensor_calibration_tool.git
+mkdir sensors_calibration_tool
+vcs import sensors_calibration_tool < sensors_calibration_tool.repos --recursive
 ```
 
-- Use Dockerfile in the repository to build a docker image
+### Step 2: Install Dependencies
 
-> ./docker.sh [option]
-
-> option ：
-
-> - build : Compile the dockerfile file and generate a docker image
-> - exec : nter the docker container
-```shell
-./docker.sh build
-```
-
-![](./image/install/dockerfile_build.jpg)
-
-- step-2成功标志
-```shell
-./docker.sh exec
-```
-
-![](./image/install/dock_exec.jpg)
-
-### step-3: Source code deployment - `SensorsCalibration`Calibration tool set
-|  Program name   | Program path | Explain
-|  ----  | ----  | ----  |
-| lidar2camera/manual_calib | SensorsCalibration/lidar2camera/manual_calib/ | LiDAR to the external reference calibration of the camera
-
-- Installation dependency
-    - c++14
-    - [gflags](https://github.com/gflags/gflags)
-    - [jsoncpp](https://github.com/open-source-parsers/jsoncpp)
-    - [Pangolin](https://github.com/stevenlovegrove/Pangolin/tree/v0.6) -- branch==v0.6
-    - Cmake
-    - opencv4
-    - eigen 3
-    - PCL >= 1.11
-
-- Start compiling
-
-> ./cmake_script/SensorsCalibration_build.sh [build_path]
-
-> build_path If you want to calibrate the `Lidar to Camera`, input the calibration path in the above list.
+- Install dependencies [apt install] 
 
 ```shell
-# LiDAR-to-camera calibration executable file
-./cmake_script/SensorsCalibration_build.sh SensorsCalibration/lidar2camera/manual_calib/
-```
-![](./image/install/SensorsCalibration_build.jpg)
-
-- step-3 Signs of success
-
-```shell
-# Execute the instruction, as shown in the figure below.
-cd ./SensorsCalibration/lidar2camera/manual_calib/
-./bin/run_lidar2camera data/0.png data/0.pcd data/center_camera-intrinsic.json data/top_center_lidar-to-center_camera-extrinsic.json
-cd -
-```
-![](./image/install/run_lidar2camera.jpg)
-
-
-### step-4: Source code deployment - `In-camera reference calibration tool`
-- Installation dependency
-```shell
+# Camera intrinsic calibration tool
 sudo apt install ros-$ROS_DISTRO-camera-calibration-parsers
 sudo apt install ros-$ROS_DISTRO-camera-info-manager
 sudo apt install ros-$ROS_DISTRO-launch-testing-ament-cmake
+
+# IMU intrinsic calibration
+sudo apt-get install libdw-dev 
 ```
 
-- Start compiling
-```
-./cmake_script/colcon_build.sh ./calibration_script/camera_intrinsic/workspace/
-```
-![](./image/camera_intrinsic/camera_intrinsic.jpg)
+- Install dependencies [source compile] 
+    - [gflags](https://github.com/gflags/gflags)
+    - [jsoncpp](https://github.com/open-source-parsers/jsoncpp)
+    - [Pangolin](https://github.com/stevenlovegrove/Pangolin/tree/v0.6) -- branch==v0.6
+    - [fast_gicp](https://github.com/SMRT-AIST/fast_gicp)
 
-- step-4 Signs of success
+
+### Step 3: Start Compilation
+
+| Calibration Name | Calibration Program | Program Address |
+|  ----  | ----  | ----  |
+| lidar2camera | Executable program for lidar-to-camera calibration | /sensors_calibration_tool/SensorsCalibration/lidar2camera/manual_calib/
+|lidar2imu|Executable program for lidar-to-IMU calibration|sensors_calibration_tool/SensorsCalibration/lidar2imu/manual_calib/
+|calibration_ws|Executable programs for camera intrinsic and lidar-to-lidar calibration|sensors_calibration_tool/calibration_ws/
+
+> ./cali_build.sh [function_name]
+
+> - help: Help document
+> - calibration_ws
+>       - Calibration data acquisition package
+>       - IMU intrinsic calibration package
+>       - Camera intrinsic calibration package
+>       - Lidar-to-lidar calibration package
+> - lidar2camera
+> - lidar2imu
+
+
+- lidar2camera compilation
+
 ```shell
-# Instruction execution effect, as shown in the figure below
-./calibration_script/camera_intrinsic/test.sh 
+./cail_build.sh lidar2camera
 ```
+![](./image/install/SensorsCalibration_lidar2camera.jpg)
 
-![](./image/camera_intrinsic/camera_intrinsic_test.gif)
+- lidar2imu compilation
+
+```shell
+./cail_build.sh lidar2imu
+```
+![](./image/install/SensorsCalibration_lidar2imu.jpg)
+
+- calibration_ws compilation
+
+```shell
+./cail_build.sh calibration_ws
+```
+> Success message: 21 packages have been completed
+
+![](./image/install/ros2package_calibration_ws.jpg)
+
+
+
+- Step 3 success message
+> Verify whether the executable programs for lidar-to-camera and lidar-to-IMU calibration have been compiled successfully by executing the following command:
+
+```shell
+# Execute the command and the output should be similar to the following image
+cd ./sensors_calibration_tool/SensorsCalibration/lidar2camera/manual_calib/
+./bin/run_lidar2camera data/0.png data/0.pcd data/center_camera-intrinsic.json data/top_center_lidar-to-center_camera-extrinsic.json
+cd -
+```
 
 ## NEXT
 Now that you have completed the `calibration tool installation`, you can proceed to:
@@ -121,5 +107,3 @@ Now that you have completed the `calibration tool installation`, you can proceed
 ### Q1: Error occurs when executing `step-2: docker deployment - build docker image`
 - Analysis: Some files were not downloaded successfully due to network issues
 - Solution: Repeat `step-2: docker deployment - build docker image` again
-
-

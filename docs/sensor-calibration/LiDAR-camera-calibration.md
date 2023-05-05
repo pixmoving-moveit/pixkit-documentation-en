@@ -29,52 +29,51 @@ The calibration of LiDAR to camera is used to register the 3D point cloud data o
 > Completed [camera intrinsic calibration](./camera-intrisics-calibration.md) -> `step-3 Signs of success`
 
 ### step-1: Collect calibration data
-
-#### Start recording.
 ```shell
-# Enter the docker container
-./docker.sh  exec
-# Execute the recording script
-./get_pcd_png.sh
-# ctrl+c -  Shortcut key to end recording
+./calibration_script/lidar2camera/lidar2camera.sh
 ```
-![](./image/lidar2camera/get_pcd_png1.gif)
-
-#### Check whether the recorded data has been recorded successfully.
+![](./image/collect_data/pcd_png.gif)
+#### Check if the collected data is successfully collected
 ```shell
-# ctrl+d Exit the container
-# Ensure successful data recording
-ll ./shared_folder/pix_data/
-ll ./shared_folder/pix_data/latest/pcd/
-ll ./shared_folder/pix_data/latest/png/
+ll ros2bag/pcd_png_data
 ```
-![](./image/lidar2camera/check_calibration_data.gif)
+![](./image/collect_data/pcd_png1.jpg)
 
-### step-2:Start the calibration program
+
+### step-2: Start the Calibration Program
 #### File structure
-
 ![](./image/lidar2camera/file_structure.jpg)
 
-| Script | Description | Note |
-| --- | --- | --- |
-| lidar2camera.sh | Script for starting calibration program | N/A |
-| lidar2camera.yaml | Configuration file for calibration program | Input parameters for calibration program |
-| config/center\_camera-intrinsic.json | Camera intrinsic file | Automatically filled in after completing [camera intrinsic calibration](./camera-intrisics-calibration.md) |
-| config/top\_center\_lidar-to-center\_camera-extrinsic.json | Initial extrinsic file | Default value can be used |
-| config/parser.py | Script to generate sensors\_calibration.yaml file | Generates parameter file usable by Autoware |
-| config/sensors\_calibration.yaml | Extrinsic parameter file | Parameter file usable by Autoware |
-| config/example.jpg | Example result of calibration output | Automatically filled in after completing [camera intrinsic calibration](./camera-intrisics-calibration.md) |
-| config/example.txt | Example result of calibration output | Automatically filled in after completing [camera intrinsic calibration](./camera-intrisics-calibration.md) |
+| Script | Description | Remarks |
+| ---- | ---- | ---- |
+|lidar2camera.sh | Calibration program startup script | None |
+|lidar2camera.yaml | Calibration program configuration file | Input parameters for the calibration program |
+|parser.py|Generate sensors_calibration.yaml file| Generate parameters file for Autoware|
+|input|Raw data for calibration| Raw data required by the calibration program |
+|input/output_camera-intrinsic.json| Camera intrinsic file| Output file from [camera intrinsic calibration](./camera%E5%86%85%E5%8F%82%E6%A0%87%E5%AE%9A.md) |
+|input/top_center_lidar-to-center_camera-extrinsic.json| Initial extrinsic file| Default is sufficient |
+|output/sensors_calibration.yaml| Extrinsic parameter file| Parameters file for Autoware |
+|output/example.jpg| Example output of calibration | |
+|output/example.txt| Example output of calibration | |
+
 
 #### calibration_script/lidar2camera/lidar2camera.yaml 
 
 ![](./image/lidar2camera/configuration_file.jpg)
 
-| Parameter Name | Parameter Function |
-| --- | --- |
-| pcd\_path | The input path of point cloud data required by the calibration program. |
-| png\_path | The input path of images required by the calibration program. |
+| Parameter Name | Parameter Function | Source |
+| ---- | ---- | --- |
+| pcd_path | Path of input image required by the calibration program | ros2bag/pcd_png_data/latest.pcd |
+| png_path | Path of input point cloud required by the calibration program | ros2bag/pcd_png_data/latest.png |
+| camera_intrinsic_filename | Input camera intrinsic file required by the calibration program | calibration_script/camera_intrinsic/output/output_camera-intrinsic.json |
+| lidar2camera_extrinsic_filename | Input lidar-to-camera extrinsic file required by the calibration program | Default is sufficient |
 
+### Copy calibration raw data to input folder
+|Copy File|
+| -- |
+|ros2bag/pcd_png_data/latest.pcd > calibration_script/lidar2camera/input/latest.pcd|
+|ros2bag/pcd_png_data/latest.png > calibration_script/lidar2camera/input/latest.png|
+|calibration_script/camera_intrinsic/output/output_camera-intrinsic.json > calibration_script/lidar2camera/input/output_camera-intrinsic.json|
 
 ### Start calibration
 
@@ -85,32 +84,29 @@ ll ./shared_folder/pix_data/latest/png/
 ![](./image/lidar2camera/lidar2camera2.gif)
 
 
-### step-3: Intrinsics/Extrinsics configuration
+### step-3: Parameter Configuration
 ![](./image/lidar2camera/cali_result.jpg)
+In the figure, the point clouds of the electric pole, the vehicle plate, and the window are aligned. This is a calibrated result. To achieve such a result, you need to adjust the parameters to achieve this calibration effect. Click the program button to fine-tune it.
 
-You can see that in the picture, the utility pole, the vehicle plate and the point cloud of the window are all aligned. This is the result of calibration. If you want to achieve such a result, you need to adjust the parameters to achieve such a calibration effect. You need to click the program button to fine-tune it.
-
-#### Extrinsics Adjustment
-
-| Button | Description |
-| --- | --- |
-| +x degree | Adjust the roll angle |
-| +y degree | Adjust the pitch angle |
-| +z degree | Adjust the yaw angle |
-| +x trans | Adjust the x-axis translation |
-| +y trans | Adjust the y-axis translation |
-| +z trans | Adjust the z-axis translation |
+#### Extrinsic Adjustment
+| Button | Description | 
+| --- | --- | 
+| +x degree | Roll angle adjustment | 
+| +y degree | Pitch angle adjustment | 
+| +z degree | Yaw angle adjustment |
+| +x trans | X-axis displacement adjustment | 
+| +y trans | Y-axis displacement adjustment |
+| +z trans | Z-axis displacement adjustment | 
 
 #### Camera Intrinsic Adjustment
-
 | Button | Description |
-| --- | --- |
-| \+ fy | The camera intrinsic can be left at default |
-| \+ fx | The camera intrinsic can be left at default |
+| --- | --- | 
+| \+ fy | Default value for camera intrinsic | 
+| \+ fx | Default value for camera
 
-<kbd>Intensity Color</kbd>: LiDAR intensity is a parameter that records the intensity of the laser beam's return, which allows us to see the intensity of the point cloud under different materials.
+<kbd>Intensity Color</kbd>: The intensity of LiDAR is a parameter that records the strength of the laser beam return, and it shows the intensity of the point cloud under different materials.
 
-<kbd>Overlap Filter</kbd>: Eliminates overlapping LiDAR points within 0.4m in depth.
+<kbd>Overlap Filter</kbd>: Eliminates the overlapping LiDAR points with a depth within 0.4m.
 
 <kbd>deg step</kbd> <kbd>t step</kbd> <kbd>fxfy scale</kbd>: These three buttons can adjust the step size of each click or keyboard input - default is recommended.
 
@@ -118,17 +114,24 @@ You can see that in the picture, the utility pole, the vehicle plate and the poi
 
 <kbd>Reset</kbd>: Click this button to reset all manual adjustments and restore the initial parameters.
 
-<kbd>Save Image</kbd>: When the calibration is completed, click this button, and the calibration image, extrinsics and intrinsics matrix will be stored in `calibration_script/lidar2camera/config` by default.
+<kbd>Save Image</kbd>: Click this button after the calibration is finished to save the calibrated image, external and internal parameter matrices in the default directory.
 
-### step-4: Verify the calibration results
-- file1：`~/pix/pit-kit/Autoware/install/individual_params/share/individual_params/config/default/pixkit_sensor_kit/sensors_calibration.yaml`
-- file2：`~/pix/pit-kit/Autoware/install/pixkit_sensor_kit_description/share/pixkit_sensor_kit_description/config/sensors_calibration.yaml`
+### Step-4: Validate the calibration results
+- Fill in the calibration results in the parameter configuration file
+    - File 1: `~/pix/pit-kit/Autoware/install/individual_params/share/individual_params/config/default/pixkit_sensor_kit/sensors_calibration.yaml`
+    - File 2: `~/pix/pit-kit/Autoware/install/pixkit_sensor_kit_description/share/pixkit_sensor_kit_description/config/sensors_calibration.yaml`
+    - Calibration Results: `calibration_script/lidar2camera/config/sensors_calibration.yaml`
 
-- Blying results: `calibration_script/lidar2camera/config/sensors_calibration.yaml`
+Step 1: Backup `File 1` and `File 2`.
 
+Step 2: Fill in the `Calibration Results` in both `File 1` and `File 2`.
 
-Step 1: Back up `file 2` and `file 2`
-Step 2: Fill in the `description result` into `Document 2` and `Document 2`
+- Start the simulation to view the results
+```shell
+~/autoware_sim.sh
+```
+![](./image/lidar2camera/result.jpg)
+![](./image/lidar2camera/result2.gif)
 
 ## NEXT
 Now that you have completed `LiDAR Camera calibration`, you can move on to [IMU calibration](./IMU-calibration.md)

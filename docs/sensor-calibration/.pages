@@ -5,5 +5,5 @@ nav:
   - LiDAR-camera-calibration.md
   - IMU-calibration.md
   - LiDAR-IMU-calibration.md
-  # - LiDAR-LiDAR-calibration.md
+  - LiDAR-LiDAR-calibration.md
   
