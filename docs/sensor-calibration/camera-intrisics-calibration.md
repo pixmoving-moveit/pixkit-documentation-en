@@ -20,20 +20,23 @@ Camera intrinsic calibration is necessary in many computer vision applications. 
 
 ### step-1: Check if the camera is connected to the industrial control computer
 
-
 ```shell
 # Open Ubuntu's built-in camera software `cheese`
 cheese
 ```
+
 > Because the color space of the camera image is different from the default color space of the software, a color error is generated, which does not affect the subsequent operation.
 
 ![](./image/camera_intrinsic/camera_intrinsic_start1.gif)
 
 ### step-2: Start the calibration program
+
 > Turn off cheese software to prevent the camera from being occupied.
+
 ```shell
 ./calibration_script/camera_intrinsic/run_usb_cam.sh 
 ```
+
 ![](./image/camera_intrinsic/camera_intrinsic_start2.gif)
 
 ### step-3: The calibration process
@@ -76,14 +79,10 @@ cheese
 
 > Note: You can make a copy, but please do not move or delete the file.
 
-shell
-
 ```shell
 ll -h /tmp/calibrationdata.tar.gz
 # -rw-rw-r-- 1 pixkit pixkit 0  Apr 14 16:59 /tmp/calibrationdata.tar.gz
 ```
 
 ## NEXT
-----
-
-Now that you have completed `camera intrinsic calibration`, you can move on to [LiDAR-camera calibration](./LiDAR-camera-calibration.md).
+Now that you have completed `camera intrinsic calibration`, you can proceed to [LiDAR-camera calibration](./LiDAR-camera-calibration.md).
