@@ -2,13 +2,18 @@
 
 > Basic principle：Flash the system backup image to IPC
 > Statement：When the industrial computer system is damaged, missing files make it impossible to run the autopilot, or the system cannot be entered due to a black screen, you can use a U disk to restore the industrial computer system and restore the factory settings.
-> References：<https://www.youtube.com/watch?v=YEFt2LPSYMk>
+
+## Prerequisites
+
+- [Clonezilla boot U disk production](https://clonezilla.nchc.org.tw/clonezilla-live/liveusb.php#windows-method-b)
+- [Backup OS Image](./backup-OS-image.md)
+
 
 ## According to the following steps
 ### step-1：Insert the USB drive and press F12 during startup (a wired keyboard can be used for this operation) to enter the flashing startup interface.
-![alt 第一步](images/lQLPJwDCetAopwbNBD3NCGmwBeApK3fykssEPgo_EcB8AQ_2153_1085.png)
+![alt](images/lQLPJwDCetAopwbNBD3NCGmwBeApK3fykssEPgo_EcB8AQ_2153_1085.png)
 ### step-2：Select the second option when using a USB flash drive to restore the image
-![alt 第二步](images/006.jpg)
+![alt](images/006.jpg)
 ### step-3：Select the Chinese interface (you can also choose other languages)
 ![alt](images/lQLPJwdL8ziBiAbNBG_NCAewb7ZWChcktagEPgo_GcCyAQ_2055_1135.png)
 ### step-4：Keep
@@ -19,7 +24,7 @@
 ![alt](images/6.png) 
 ### step-7：Read to U disk(dev/sdb)
 ![alt](images/35.jpg) 
-### step-8：ctrl+c
+### step-8：When the hard disk is recognized，ctrl+c
 ![alt](images/l9.png) 
 ### step-9：Select U disk when inserting
 ![alt](images/36.jpg) 
@@ -47,5 +52,7 @@
 
 **Note**： This U disk is only recommended to restore the image, do not make any modification, add or save other files, so as not to damage the environment of the startup disk.
 
-
+## QUOTATION
+[Clonezilla 再生龍](https://clonezilla.nchc.org.tw/intro/)
+[Make Image Video](https://www.youtube.com/watch?v=YEFt2LPSYMk)
 
