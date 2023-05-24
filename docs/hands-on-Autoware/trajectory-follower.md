@@ -26,16 +26,8 @@ The trajectory tracking module is located in [autoware.universe/control](https:/
 
   
 ## Data Interaction
-#### Message Passing
-To be completed.
 
-#### Key Topic Subscription List
-To be completed.
-
-#### Key Topic Publishing List
-To be completed.
-
-#### Detailed Topic Subscription List
+#### Subscribed Topics
 |Topic Name | Message Type | Subscribed Node
 |----------------------------------------------------------|--------------------------------------------------------|----------------------------------------------
 |/autoware/state                                           | autoware_auto_system_msgs/msg/AutowareState            | shift_decider
@@ -70,7 +62,7 @@ To be completed.
 
 
 
-#### Detailed topic publishing list
+#### Published Topic
 | Topic Name | Message Type | Publishing Node
 |----------------------------------------------------------|--------------------------------------------------------|----------------------------------------------
 |/api/autoware/get/engage                                  | autoware_auto_vehicle_msgs/msg/Engage                  | vehicle_cmd_gate
@@ -126,28 +118,337 @@ The detailed configuration of each node is shown below.
 |shift_decider                     | None
 |vehicle_cmd_gate                  | <https://autowarefoundation.github.io/autoware.universe/main/control/vehicle_cmd_gate/#parameters>
 
+## Four-Wheel Steering Vehicle Kinematic Model
+Vehicles equipped with a four-wheel steering system are more agile than vehicles with the front-wheel steering system. Compared to vehicles with the same size but front-wheel steering structure, they have a smaller turning radius. This means they can maneuver or change direction in tighter spaces. When driving on highways, vehicles with a four-wheel steering system can improve the stability of the vehicle by adjusting the steering of the rear wheels to achieve a larger turning radius.
 
-## Vehicle kinematic model
-According to the given references, the kinematic model of a vehicle with a four-wheel steering actuator<sup>[1]</sup> can be expressed as
+### Four-Wheel Steering Kinematic Model Based on Cartesian Coordinate System
+
 ![four-wheel-steering-model](images/four-wheel-steering-model.png)
 
+As shown in the above figure, $A$ 、$B$、$C$ represent the centers of the front and rear wheels, as well as the vehicle's center of gravity respectively. $V$ denotes the vehicle's velocity,$\ell_f$ and $\ell_r$ represent the distances from the front and rear wheels to the vehicle's center of gravity, and $\delta_f$ and $\delta_r$ indicate the front and rear wheel steering angles respectively. $\psi$ represents the vehicle's heading angle, and $\beta$  represents the vehicle's sideslip angle. $O$  represents the vehicle's rotation center, and $R$ denotes the vehicle's turning radius.  
+Decomposing the current velocity $V$ of the vehicle along the global coordinate system, we can denote it as $\dot{X}$ and $\dot{Y}$, $\dot{X}$represents the velocity of the vehicle along the global coordinate X-axis, and $\dot{Y}$ represents the velocity of the vehicle along the global coordinate y-axis. Therefore, we have the following equations:
+
+<div style="text-align: right;">
+\[
+\begin{align}
+\dot{X}=V \cos(\psi+\beta) \\
+\dot{Y}=V \sin(\psi+\beta)
+\end{align} 
+\tag{1.1}
+\]
+</div> 
+
+According to the sine theorem, we have the following relation in angle $\angle OCA$:
 $$
+\frac{\sin \left(\delta_f-\beta\right)}{\ell_f}=\frac{\sin \left(\frac{\pi}{2}-\delta_f\right)}{R} \tag{1.2}
+$$
+
+Similarly, in angle $\angle OCB$, we have:
+$$
+\frac{\sin \left(\beta-\delta_r\right)}{\ell_r}=\frac{\sin \left(\frac{\pi}{2}+\delta_r\right)}{R} \tag{1.3}
+$$
+
+Expanding equation (1.2) using the  product-to-sum and sum-to-product formulas, we have:
+$$
+\frac{\sin(\delta_f) \cos(\beta) - \cos(\delta_f) \sin(\beta)}{\ell_f} = \frac{\cos(\delta_f)}{R} \tag{1.4}
+$$
+
+Similarly, expanding equation (1.3) using the product-to-sum formulas, we have:
+$$
+\frac{\sin(\beta) \cos(\delta_r) - \cos(\beta) \sin(\delta_r)}{\ell_r} = \frac{\cos(\delta_r)}{R} \tag{1.5}
+$$
+
+Multiplying both sides of equation (1.4) by $\frac{\ell_f}{\cos(\delta_f)}$, we have:
+$$
+\tan(\delta_f) \cos(\beta) - \sin(\beta) = \frac{\ell_f}{R} \tag{1.6}
+$$
+
+Multiplying both sides of equation (1.5) by $\frac{\ell_r}{\cos(\delta_r)}$, we have:
+$$
+\sin(\beta) - \cos(\beta) \tan(\delta_r) = \frac{\ell_r}{R} \tag{1.7}
+$$
+
+Adding equations (1.6) and (1.7), we have:
+$$
+\cos(\beta)(\tan(\delta_f) - \tan(\delta_r)) = \frac{\ell_f + \ell_r}{R}  \tag{1.8}
+$$
+
+When the vehicle is traveling at low speeds, the angular velocity of the vehicle can be expressed as follows:
+$$
+\dot{\psi} =\frac{V}{R} \tag{1.9} 
+$$
+
+Combining equations (1.8) and (1.9), we have:
+$$
+\dot{\psi} = \frac{V\cos(\beta)}{\ell_f + \ell_r} (\tan(\delta_f) - \tan(\delta_r)) \tag{1.10}
+$$
+
+Therefore, the kinematic equation of the vehicle can be expressed as follows:
+<div style="text-align: right;">
+\[
 \begin{aligned}
 \dot{X} & =V \cos (\psi+\beta) \\
 \dot{Y} & =V \sin (\psi+\beta) \\
 \dot{\psi} & =\frac{V \cos (\beta)}{\ell_f+\ell_r}\left(\tan \left(\delta_f\right)-\tan \left(\delta_r\right)\right)
-\end{aligned}
-$$
+\end{aligned} \tag{1.11}
+\]
+</div> 
 
-Where $X$, $Y$, $\psi$ denote the position and heading angle of the vehicle in the global coordinate system, $\beta$ denotes the slip angle of the vehicle , $V$ denotes the velocity of the vehicle, the center of gravity (c.g.) of the vehicle is at point C. The distances of points A  and  B  from  the  c.g.  of  the  vehicle  are $\ell_f$ and $\ell_r$ respectively.
+Where $\dot{X}$, $\dot{Y}$, and $\dot{\psi}$ represent the velocity of the vehicle along the $X$-axis, $Y$-axis and the angular velocity of the heading angle in the global coordinate system, respectively.
 
-$$
-\begin{aligned}
-\dot{X} & =V \cos (\psi) \\
+Assuming that the front and rear wheels steer in the same magnitude but opposite directions, i.e., when the vehicle turns, the steering angles of the front and rear wheels are equal in magnitude but opposite in direction. Furthermore, when the vehicle is traveling at low speeds, the influence of the sideslip angle on the vehicle's motion can be neglected, so we have $\beta=0$. In this case, the heading angle of the vehicle aligns with the direction of motion. Based on these assumptions, the kinematic equation for the vehicle regarding equation (1.11) can be simplified to:
+<div style="text-align: right;">
+\[
+\begin{align*}
+\dot{X} & =V \cos (\psi) \\  
 \dot{Y} & =V \sin (\psi) \\
 \dot{\psi} & =\frac{2 V \tan \left(\delta_f\right)}{\ell_f+\ell_r} 
-\end{aligned}
+\end{align*} \tag*{1.12}
+\]
+</div>
+
+### Four-Wheel Steering Kinematic Model Based on Path Coordinate System
+From the previous derivation, it is evident that the description of the vehicle's motion state depends on the coordinate system itself. When the vehicle is traveling on the road, we prefer to use a coordinate system based on the road to describe the vehicle's motion state. For ease of understanding, the following derivation process will use the commonly seen front-wheel steering model for derivation. Finally, based on the correlations between the models, we will generalize it to the four-wheel steering model.
+
+![base_on_path_coordinate_of_four_wheel_steering_model](images/base_on_path_coordinate_of_four_wheel_steering_model.png)   
+
+In the above figure, $e_{ra}$ represents the lateral distance of the vehicle to the road, $\theta$ represents the heading angle of the vehicle in the global coordinate system, $v$ represents the current velocity of the vehicle, and $\delta$ represents the steering angle of the vehicle. $(c_x, c_y)$ represents the projection point of the vehicle on the road (i.e., the nearest point of the vehicle on the road), and $\theta_p$ represents the angle between the tangent line at the projection point and the $x$-axis of the global coordinate system. $s$ represents the distance from the start point of the road to the projection point, and we will use $\kappa(s)$ to denote the curvature of the road at the projection point.
+The curvature of the road at the projection point can be expressed as:
+$$
+\kappa(s)=\frac{d\theta_p}{ds} \tag{2.1}
+$$
+Establishing a coordinate system at the projection point along the tangent direction and its perpendicular direction, the distance from the perpendicular direction to the vehicle is denoted as $e_{ra}$  which is the lateral distance of the vehicle with respect to the road coordinate system. In this case, $\theta_{e}$ is denoted as the rotation angle of the vehicle relative to the road coordinate system, can be expressed as:
+$$
+\theta_e = \theta - \theta_p \tag{2.2}
 $$
 
+Therefore, the state variables of the vehicle in the road coordinate system can be represented as $\begin{bmatrix} s & e_{ra} & \theta_e \end{bmatrix}^\mathrm{T}$.
+
+According to equation $(2.1)$, taking the derivative of $\theta_p$ with respect to time $t$, we have:
+$$
+\dot{\theta}_p=\kappa(s)\dot{s} \tag{2.3}
+$$
+
+According to the analysis in reference [2], it is known that:
+<div style="text-align: right;">
+\[
+\dot{s}=v{\rm{cos}}(\theta_e)+\dot{\theta}_pe_{ra} \tag{2.4}
+\]
+</div>
+
+Substituting equation (2.3) into equation (2.4) and rearranging, we have:
+$$ 
+\dot{s}=\frac{v\rm{cos}(\theta_e)}{1-e_{ra}\kappa(s)} \tag{2.5}
+$$ 
+
+Therefore, the lateral velocity of the vehicle in the Frenet coordinate system can be expressed as:
+<div style="text-align: right;">
+\[
+\dot{e}_{ra}= v_{x_{car}} - v_{x_{traj}} \tag{2.6}
+\]
+</div>
+
+$v_{x_{car}}$ represents the lateral velocity of the vehicle in the Frenet coordinate system, while $v_{x_{traj}}$ represents the lateral velocity of the projection point (reference trajectory) in the Frenet coordinate system. Since the projection point has a zero velocity in the perpendicular direction (Frenet coordinate), we have $v_{x_{traj}} = 0$. In other words:
+
+<div style="text-align: right;">
+\[
+\dot{e}_{ra}=v{\rm{sin}}(\theta_e) \tag{2.7}
+\]
+</div>
+
+According to equation (2.2), the angular velocity of the vehicle relative to the road is given by:
+$$
+\dot{\theta}_e=\dot{\theta}-\dot{\theta}_p \tag{2.8}
+$$
+
+From equation (1.12), we know that $\dot{\theta}=\frac{2 v \tan(\delta_f)}{L}$. According to reference [2], $\dot{\theta}p=\frac{v \kappa(s)\cos(\theta_e)}{1-e{ra}\kappa(s)}$. Substituting this into equation (2.8), we have:
+
+<div style="text-align: right;">
+\[
+\dot{\theta}_e=\frac{2 v \tan \left(\delta_f\right)}{L}-\frac{ v \kappa(s){\rm{cos}}(\theta_e)}{1-e_{ra}\kappa(s)} \tag{2.9}
+\]
+</div>
+
+By combining the above equations, we can obtain the kinematic model of a four-wheel steering vehicle in the road coordinate system as follows:
+
+<div style="text-align: right;">
+\[
+\left[ \begin{array}{c} \dot{s} \\ \dot{e}_{ra} \\ \dot{\theta}_e  \end{array} \right] =\left[ \begin{array}{c} \frac{v\rm{cos}(\theta_e)}{1-e_{ra}\kappa(s)} \\ {v \rm{sin}(\theta_e)} \\ \frac{2 v \rm{tan}(\delta)}{L} - \frac{v \kappa(s)\rm{cos}(\theta_e)}{1-e_{ra}\kappa(s)} \end{array}  \right]\tag{2.10}
+\]
+</div>
+
+## Control Algorithm
+In Autoware.core/universe, vehicle control is divided into lateral control and longitudinal control. By decoupling the control problems, the algorithm complexity is reduced to meet the requirements of control performance. Longitudinal control is used for acceleration and deceleration of the vehicle's speed. Lateral control is used for steering control of the vehicle.
+## Longitudinal Control Algorithm for Vehicle based on Road Coordinate System
+**To be completed**
+
+## Lateral Control Algorithm for Vehicle based on Road Coordinate System
+Currently, vehicle lateral control algorithms can be broadly categorized into three types:    
+
+1. Geometry-based lateral control algorithms, such as Pure Pursuit and Stanley. These algorithms utilize geometric principles to control the vehicle's lateral movement, determining the appropriate steering angle based on the desired trajectory.   
+2. Model-based lateral control algorithms, such as LQR (Linear Quadratic Regulator) and MPC (Model Predictive Control). These algorithms employ mathematical models of the vehicle and the environment to optimize control inputs and achieve desired lateral behavior.
+3. Machine learning-based lateral control algorithms, such as Reinforcement Learning and Deep Learning. These algorithms leverage machine learning techniques to learn and adapt control policies based on observed data, enabling the vehicle to make lateral control decisions autonomously.
+
+In Autoware.core/universe, two lateral control algorithms are provided: Pure Pursuit and MPC (Model Predictive Control). Users can choose the appropriate algorithm based on their specific requirements and needs.
+
+### Model Predictive Control
+Model Predictive Control (MPC) is an algorithm based on the idea of using a mathematical model of the target system to make predictions and optimize control inputs over a future time horizon. It involves formulating an optimization problem to find the optimal control inputs that minimize a cost function while satisfying system constraints. By solving this optimization problem, MPC obtains the best control outputs for the current time step based on the predicted behavior of the model over a certain future time period.
+
+> The following section provides a general overview and summary of the basic principles of the MPC algorithm. Please note that there may be differences between this conceptual description and the specific implementation of the MPC algorithm in Autoware.core/universe. Further details and additions related to the specific implementation will be provided later on.
+#### Selection of Control Variables
+
+Given that the reference trajectory is known, the angular velocity at the projection point can be expressed as $\dot{\theta}p = v{y_{traj}} \cdot k(s)$, where $v_{y_{traj}}$ represents the longitudinal velocity at the projection point along the reference trajectory, and $k(s)$ denotes the curvature of the reference trajectory at the projection point. By combining equations (1.12), (2.3), (2.7), and (2.8), we can obtain the following expressions:
+
+<div style="text-align: right;">
+\[             
+\left[ \begin{array}{c} \dot{e}_{ra} \\ \dot{\theta}_e  \end{array} \right]= \left[ \begin{array}{c} v\rm{sin}(\theta_e) \\ \frac{2v \tan(\delta)}{L} - v_{ref}k(s) \end{array} \right] \tag{3.1}
+\]
+</div>
+
+Let's define the state variables as $x = \begin{bmatrix} e_{ra} \ \theta_e \end{bmatrix}$ and the input variable as $u = \delta$. The state equation can then be expressed as:
+$$
+\dot{x}=f(x,u) \tag{3.2}
+$$
+
+#### Linearization of the Motion Model
+
+Assuming that the vehicle is operating near the projection point on the road during tracking, we can linearize the model by performing a first-order Taylor expansion at the projection point. We have:
+$$
+\dot{x}=f(x_{ref},u_{ref})+\frac{\partial f(x,u)}{\partial x}(x-x_{ref})+\frac{\partial f(x,u)}{\partial u}(u-u_{ref})
+ \tag{3.3}
+$$
+
+where
+
+<div style="text-align: right;">
+\[             
+\frac{\partial f(x,u)}{\partial x} = \begin{bmatrix} 0 & vcos \theta_{e}\\  0 & 0 \end{bmatrix}, \frac{\partial f(x,u)}{\partial u} = \begin{bmatrix} 0 \\ \frac{2v}{Lcos^2 \delta} \end{bmatrix} \tag{3.14}
+\]
+</div>
+
+Furthermore, let $A=\frac{\partial f(x,u)}{\partial x}$ and $B=\frac{\partial f(x,u)}{\partial u}$, then we have:
+$$
+\dot{x}=f(x_{ref},u_{ref})+A(x-x_{ref})+B(u-u_{ref}) \tag{3.5}
+$$
+
+Thus, we have obtained the linearized state equation for a four-wheel steering vehicle.
+
+#### Constructing Error Model
+
+We can construct an error state equation at the reference point, which can be expressed as:
+
+<div style="text-align: right;">
+\[   
+\begin{align*}
+\dot{x}-\dot{x}_{ref} &= f(x_{ref},u_{ref})+A(x-x_{ref})+B(u-u_{ref}) - f(x_{ref},u_{ref}) \\
+\dot{\bar{x}} &= A\bar{x} +B\bar{u}
+\end{align*}  \tag{3.6}
+\]
+</div>
+
+where $\dot{\bar{x}}=\dot{x}-\dot{x}_{ref}$，$\bar{x} = x-x_{ref}$，$\bar{u} = u-u_{ref}$
+
+#### Discretization of Error Model
+Discretizing equation (3.6), we obtain:
+
+<div style="text-align: right;">
+\[ 
+\bar{x}_{k+1}-\bar{x}_k = A\bar{x}_k + B\bar{u}_k \tag{3.7}
+\]
+</div>
+
+Simplifying the expression, we have:
+$$
+\bar{x}_{k+1} = (I+AT)\bar{x}_k+BT\bar{u}_k \tag{3.8}
+$$
+
+Let's define $\bar{A}=(I+AT)$ and $\bar{B}=BT$. We can rewrite the equation as follows:
+$$
+\bar{x}_{k+1}=\bar{A}\bar{x}_k+\bar{B}\bar{u}_k \tag{3.9}
+$$
+
+#### Model Prediction
+To predict the future states of the vehicle, we need to perform model predictions. Assuming we want to predict the states for the next n steps, we have:
+
+<div style="text-align: right;">
+\[   
+\begin{bmatrix} \bar{x}_0 \\ \bar{x}_1 \\ \bar{x}_2 \\ \bar{x}_3 \\ \vdots \\ \bar{x}_n\end{bmatrix} = \begin{bmatrix}I \\ \bar{A} \\\bar{A}^2 \\\bar{A}^3 \\\vdots\\\bar{A}^n \\\end{bmatrix}\bar{x}_0 + \begin{bmatrix}0 & 0 & 0 & \cdots & 0 \\ \bar{B} & 0 & 0 & \cdots & 0\\\bar{A}\bar{B} & \bar{B} & 0 & \cdots & 0\\\bar{A}^2\bar{B} & \bar{A}\bar{B} & \bar{B} & \cdots & 0\\\vdots & \vdots & \vdots & \ddots & \vdots\\\bar{A}^{n-1}\bar{B} & \bar{A}^{n-2}\bar{B} & \bar{A}^{n-3}\bar{B} & \cdots & \bar{B}\end{bmatrix}\begin{bmatrix} \bar{u}_0 \\ \bar{u}_1 \\ \bar{u}_2 \\ \vdots \\ \bar{u}_{n-1}\end{bmatrix} \tag{3.10}
+\]
+</div>
+
+Simplified, we can write it as:
+$$
+\tilde{X}=\tilde{A}\bar{x}_0+\tilde{B}\tilde{U} \tag{3.11}
+$$
+
+#### Formulating Constrained Quadratic Programming Problem
+Our objective is to minimize a cost function while satisfying certain physical constraints. The goal is to minimize the errors between the current state sequence $\bar{x}_i, i \in [0, n]$ and the desired state sequence $\bar{x}_{i_{ref}}, i \in [0, n]$, as well as the predicted inputs $\bar{u}_j, j \in [0, n-1]$.
+<div style="text-align: right;">
+\[ 
+J = min\sum_{i=0}^{n-1}((\bar{x}_i-\bar{x}_{i_{ref}})^\mathrm{T}Q(\bar{x}_i-\bar{x}_{i_{ref}}) + \bar{u}_{i}^\mathrm{T}R\bar{u}_{i}) + (\bar{x}_n-\bar{x}_{n_{ref}})^\mathrm{T}F(\bar{x}_n-\bar{x}_{n_{ref}}) \tag{3.12}
+\]
+</div>
+
+Since $\bar{x}_i$ represents the error state, it is evident that the desired error state is $\bar{x}_{i_{ref}} = 0$. Therefore, we can simplify the formulation as follows:
+<div style="text-align: right;">
+\[ 
+J =\text{min} \begin{bmatrix} \bar{x}_0 \\ \bar{x}_1 \\ \bar{x}_2 \\ \bar{x}_3 \\ \vdots \\ \bar{x}_n \end{bmatrix}^T \begin{bmatrix} Q & 0 & 0 & 0 & \cdots & 0\\ 0 & Q & 0 & 0 & \cdots & 0 \\ 0 & 0 & Q & 0 & \cdots & 0 \\ 0 & 0 & 0 & Q & \cdots & 0 \\ \vdots & \vdots & \vdots & \vdots & \ddots & \vdots \\ 0 & 0 & 0 & 0 & \cdots & F \end{bmatrix} \begin{bmatrix} \bar{x}_0 \\ \bar{x}_1 \\ \bar{x}_2 \\ \bar{x}_3 \\ \vdots \\ \bar{x}_n \end{bmatrix} + \begin{bmatrix} \bar{u}_0  \\ \bar{u}_1 \\ \bar{u}_2 \\ \vdots \\ \bar{u}_{n-1} \end{bmatrix}^T \begin{bmatrix} R & 0 & 0 & \cdots & 0 \\ 0 & R & 0 & \cdots & 0 \\ 0 & 0 & R & \cdots & 0 \\ \vdots & \vdots & \vdots & \ddots & \vdots \\ 0 & 0 & 0 & \cdots & R\end{bmatrix} \begin{bmatrix} \bar{u}_0  \\ \bar{u}_1 \\ \bar{u}_2 \\ \vdots \\ \bar{u}_{n-1} \end{bmatrix} \tag{3.13}
+\]
+</div>
+
+Simplified, we can write it as:
+
+<div style="text-align: right;">
+\[ 
+\begin{align*}
+J = \text{min} \quad &  \mathbf{\tilde{X}}^\top \mathbf{\tilde{Q}} \mathbf{\tilde{X}} + \mathbf{\tilde{U}}^\top \mathbf{\tilde{R}} \mathbf{\tilde{U}} 
+\end{align*} \tag{3.14}
+\]
+</div>
+
+Now let's transform equation (3.14) into the following standard form:
+
+$$
+\begin{align*}
+\text{minimize} \quad & \frac{1}{2} \mathbf{x}^\top \mathbf{H} \mathbf{x} + \mathbf{c}^\top \mathbf{x} \\
+\text{subject to} \quad & \mathbf{A} \mathbf{x} \leq \mathbf{b} \\
+& \mathbf{G} \mathbf{x} = \mathbf{h}
+\end{align*}
+$$
+
+Substituting equation (3.11) into equation (3.14) and expanding, we have:
+
+<div style="text-align: right;">
+\[ 
+\begin{align*}
+J &= \text{min} \quad \mathbf{\bar{x}_0^\top\tilde{A}^\top \tilde{Q} \tilde{A}\bar{x}_0 +\tilde{U}^\top\tilde{B}^\top \tilde{Q} \tilde{B}\tilde{U} + \bar{x}_0^\top\tilde{A}^\top \tilde{Q} \tilde{B}\tilde{U} + \tilde{U}^\top\tilde{B}^\top \tilde{Q} \tilde{A}\bar{x}_0 + \tilde{U}^\top\tilde{R}\tilde{U}}
+\end{align*} \tag{3.15}
+\]
+</div>
+
+Where $\bar{x}_0^\top \tilde{A}^\top \tilde{Q} \tilde{A} \bar{x}_0$ is only dependent on the initial state and can be considered as a constant $C$, and $\tilde{U}^\top \tilde{B}^\top \tilde{Q} \tilde{A} \bar{x}_0$ is the transpose of $\bar{x}_0^\top \tilde{A}^\top \tilde{Q} \tilde{B} \tilde{U}$, and it is a 1x$n$ dimensional vector. The sum of the two terms is $2 \bar{x}_0^\top \tilde{A}^\top \tilde{Q} \tilde{B} \tilde{U}$. Therefore, we can simplify the expression as follows:
+
+<div style="text-align: right;">
+\[ 
+\begin{align*}
+J &= \text{min} \quad \mathbf{ \frac{1}{2} \tilde{U}^\top (\tilde{B}^\top \tilde{Q} \tilde{B} + \tilde{R}) \tilde{U} + \bar{x}_0^\top\tilde{A}^\top\tilde{Q}\tilde{B}\tilde{U}}
+\end{align*} \tag{3.16}
+\]
+</div>
+
+Where $H = \tilde{B}^\top \tilde{Q} \tilde{B} + \tilde{R}$ and $c^\top = \bar{x}_0^\top \tilde{A}^\top \tilde{Q} \tilde{B}$. We can introduce inequality constraints on the predicted inputs. Therefore, we have:
+
+<div style="text-align: right;">
+\[ 
+\begin{aligned}
+&min \quad \frac{1}{2} \tilde{U}^\top (\tilde{B}^\top \tilde{Q} \tilde{B} + \tilde{R}) \tilde{U} + \bar{x}_0^\top\tilde{A}^\top\tilde{Q}\tilde{B}\tilde{U} \\
+&s.t. \quad \tilde{U}_{min} \leq \tilde{U} \leq \tilde{U}_{max} 
+\end{aligned} \tag{3.17}
+\]
+</div>
+
+The equation (3.17) can be solved using a solver, and the obtained optimal solution is directly used as the control signal for the vehicle, which is sent to the vehicle control unit to achieve lateral control of the vehicle.
+
 ## References
-[1]: Rajamani, Rajesh. Vehicle dynamics and control. Springer Science & Business Media, 2011.
+[1]: Rajamani, Rajesh. Vehicle dynamics and control. Springer Science & Business Media, 2011.  
+[2]: A. De Luca, G.Oriolo, and C. Samson.  Feedback control of anonholonomic car-like robot.  InRobot MotionPlanning and Control, pages 171–249. 1998
