@@ -35,3 +35,7 @@ This document provides instructions for calibrating the top laser radar [RS-Heli
 > - Colored point cloud: Front blind spot lidar.
 
 ![](./image/lidar2lidar/lidar2lidar.jpg)
+
+> After the calibration check is completed, the results will be output to the terminal, and you can copy and paste them to save in a file.
+
+![](./image/lidar2lidar/result.jpg)
