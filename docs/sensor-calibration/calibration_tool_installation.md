@@ -17,7 +17,8 @@
 ## Installation
 ### Step 1: Clone the code repository
 ```shell
-git clone -b feature/deploy-calibration-tools https://github.com/pixmoving-moveit/sensor_calibration_tool.git
+git clone -b ros2-calibration-tools https://github.com/pixmoving-moveit/sensor_calibration_tool.git
+cd sensor_calibration_tool
 mkdir sensors_calibration_tool
 vcs import sensors_calibration_tool < sensors_calibration_tool.repos --recursive
 ```
@@ -34,9 +35,16 @@ sudo apt install ros-$ROS_DISTRO-launch-testing-ament-cmake
 
 # IMU intrinsic calibration
 sudo apt-get install libdw-dev 
+
+# Ceres
+sudo apt-get install libgoogle-glog-dev libatlas-base-dev libeigen3-dev libsuitesparse-dev
+
+sudo apt-get install libgoogle-glog-dev
+sudo apt-get install libpcl-dev pcl-tools
 ```
 
 #### Install dependencies `[source]`
+- [Ceres Solver](https://ceres-solver.googlesource.com/ceres-solver)
 - [gflags](https://github.com/gflags/gflags)
 - [jsoncpp](https://github.com/open-source-parsers/jsoncpp)
 - [Pangolin](https://github.com/stevenlovegrove/Pangolin/tree/v0.6) -- branch==v0.6
@@ -106,8 +114,3 @@ cd -
 Now that you have completed the `calibration tool installation`, you can proceed to
 
 - [camera intrinsic calibration](./camera-intrisics-calibration.md)
-
-## Frequently Asked Questions
-### Q1: Error occurs when executing `step-2: docker deployment - build docker image`
-- Analysis: Some files were not downloaded successfully due to network issues
-- Solution: Repeat `step-2: docker deployment - build docker image` again

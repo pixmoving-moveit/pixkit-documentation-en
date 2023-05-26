@@ -11,7 +11,7 @@ Camera intrinsic calibration is necessary in many computer vision applications. 
 - Completed [calibration tool installation](./calibration_tool_installation.md)
 - Prepare calibration board
     - 8x11 corner points
-    - Small square 0.05m X 0.05mX
+    - Small square 0.05m X 0.05m
     - Material: diffuse aluminum profile
 ![](./image/camera_intrinsic/camera_intrinsic_start2.png)
 
@@ -75,14 +75,15 @@ cheese
 
 ### step-4: Verification of successful calibration
 
-> The compressed file `/tmp/calibrationdata.tar.gz` will be output, and the creation time should be the most recent.
+> The compressed file `outpu/output_camera-intrinsic.json` will be output, and the creation time should be the most recent.
 
 > Note: You can make a copy, but please do not move or delete the file.
 
 ```shell
-ll -h /tmp/calibrationdata.tar.gz
-# -rw-rw-r-- 1 pixkit pixkit 0  Apr 14 16:59 /tmp/calibrationdata.tar.gz
+ll -h ./calibration_script/camera_intrinsic/output
 ```
+![](./image/camera_intrinsic/result.png)
+
 
 ## NEXT
 Now that you have completed `camera intrinsic calibration`, you can proceed to [LiDAR-camera calibration](./LiDAR-camera-calibration.md).

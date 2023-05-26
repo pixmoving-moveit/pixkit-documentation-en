@@ -52,11 +52,11 @@ cd -
 ```
 ros2 bag info ros2bag/imu_latest_ros2bag
 ```
-> Check whether the recording time `Duration` is greater than `2hr` (2 hours) [8802.282/3600=1.45h]
+> Check if the recording time duration is greater than 2 hours (2 hours is equal to 8802.282 seconds divided by 3600 seconds/hour, which is approximately 2.45 hours).
 
-> Check whether `Count` and [Duration multiplied by frequency] are roughly the same: indicating that the data has not been lost too much.
+> Also, compare the count with the result obtained by multiplying the duration by the frequency. If the difference is not significant, it indicates that there hasn't been a significant loss of data.
 
-> - imu frequency is 100hz--8802.282*100=8802282
+> - imu frequency is 100hz--8802.282*100=880228.2
 
 ![](./image/IMU_calibration/check_ros2bag.jpg)
 

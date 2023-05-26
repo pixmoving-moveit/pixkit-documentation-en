@@ -15,6 +15,7 @@ It should be noted that different LiDARs and IMUs may have different error and n
     - [CHC® CGI-410](https://www.huace.cn/product/product_show/467)
     - Top-mounted LiDAR [RS-Helios-16P]
     - Combination navigation and positioning status `Navigation Combination`
+![](./image/lidar2imu/gnss_status.jpeg)
 
 ## Starting Calibration
 ### Step 1: Data Collection
@@ -94,3 +95,9 @@ cat ./calibration_script/lidar2imu/output/sensors_calibration.yaml
 
 ## NEXT
 Now that you have completed the `LiDAR-IMU calibration`, you can proceed with the [LiDAR-LiDAR calibration](./LiDAR-LiDAR-calibration.md).
+
+## Frequently Asked Questions
+### Q1: The GUI interface crashes when executing `step-3: Start Calibration`.
+
+- Problem cause: There is an issue with the data collected in `step-1: Data Collection`.
+- Solution: Retry the `step-1: Data Collection` to recollect the data.
