@@ -208,7 +208,7 @@ Assuming that the front and rear wheels steer in the same magnitude but opposite
 </div>
 
 ### Four-Wheel Steering Kinematic Model Based on Path Coordinate System
-From the previous derivation, it is evident that the description of the vehicle's motion state depends on the coordinate system itself. When the vehicle is traveling on the road, we prefer to use a coordinate system based on the road to describe the vehicle's motion state. For ease of understanding, the following derivation process will use the commonly seen front-wheel steering model for derivation. Finally, based on the correlations between the models, we will generalize it to the four-wheel steering model.
+From the previous derivation, it is evident that the description of the vehicle's motion state depends on the coordinate system itself. When the vehicle is traveling on the road, we prefer to use a coordinate system based on the road to describe the vehicle's motion state. 
 
 ![base_on_path_coordinate_of_four_wheel_steering_model](images/base_on_path_coordinate_of_four_wheel_steering_model.png)   
 
