@@ -30,7 +30,8 @@ The calibration of LiDAR to camera is used to register the 3D point cloud data o
 
 ### step-1: Collect calibration data
 ```shell
-./calibration_script/lidar2camera/lidar2camera.sh
+# The working directory is the root directory of the calibration tool <sensor_calibration_tool>.
+./collect_script/data_collect_script/pcd_png_extractor.sh
 ```
 ![](./image/collect_data/pcd_png.gif)
 #### Check if the collected data is successfully collected
@@ -39,6 +40,10 @@ ll ros2bag/pcd_png_data
 ```
 ![](./image/collect_data/pcd_png1.jpg)
 
+```shell
+nautilus ros2bag/pcd_png_data/
+```
+![](./image/lidar2camera/check.png)
 
 ### step-2: Start the Calibration Program
 #### File structure
@@ -114,7 +119,7 @@ In the figure, the point clouds of the electric pole, the vehicle plate, and the
 
 <kbd>Reset</kbd>: Click this button to reset all manual adjustments and restore the initial parameters.
 
-<kbd>Save Image</kbd>: Click this button after the calibration is finished to save the calibrated image, external and internal parameter matrices in the default directory.
+<kbd>Save Image</kbd>: After calibration is completed, clicking this button will by default save the calibrated images, extrinsic parameters, and intrinsic matrices in the `./calibration_script/lidar2camera/output` folder.
 
 ### Step-4: Validate the calibration results
 - Fill in the calibration results in the parameter configuration file
@@ -137,3 +142,10 @@ Step 2: Fill in the `Calibration Results` in both `File 1` and `File 2`.
 
 ## NEXT
 Now that you have completed `LiDAR Camera calibration`, you can move on to [IMU calibration](./IMU-calibration.md)
+
+## Frequently Asked Questions
+### Q1: When executing `step-1: Data Collection` -> `Check if the collected data is successful`, the image is displayed abnormally as shown in the following image:
+![](./image/lidar2camera/q1.jpeg)
+
+- Data collection failed.
+- Solution: On the industrial computer, try unplugging and re-plugging the USB interface of the camera, and then perform data collection again.
